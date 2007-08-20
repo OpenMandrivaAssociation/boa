@@ -19,7 +19,8 @@ Group: System/Servers
 BuildRoot: %{_tmppath}/%{name}-%{version}buildroot
 BuildRequires: flex bison
 Requires: /etc/mime.types
-Prereq: rpm-helper
+Requires(post): rpm-helper
+Requires(postun): rpm-helper
 Provides: webserver
 
 %description
