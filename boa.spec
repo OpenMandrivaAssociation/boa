@@ -1,7 +1,7 @@
 %define name boa
 %define version 0.94.14
 %define rcver	rc17
-%define release %mkrel 0.rc17.3
+%define release %mkrel 0.rc17.4
 %define webrootdir /var/www/html
 
 
