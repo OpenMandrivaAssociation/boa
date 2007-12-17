@@ -16,7 +16,6 @@ Patch: boa-default-config.patch
 URL: http://www.boa.org/
 License: GPL
 Group: System/Servers
-BuildRoot: %{_tmppath}/%{name}-%{version}buildroot
 BuildRequires: flex bison
 Requires: /etc/mime.types
 Requires(post): rpm-helper
