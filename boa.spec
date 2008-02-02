@@ -1,72 +1,74 @@
 %define name boa
 %define version 0.94.14
-%define rcver	rc17
-%define release %mkrel 0.rc17.4
+%define rcver	rc21
+%define release %mkrel 0.%{rcver}.1
 %define webrootdir /var/www/html
 
 
-Summary: The boa web server
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Source0: http://www.boa.org/%{name}-%{version}%{rcver}.tar.bz2
-Source1: boa.init
-Source2: boa.sysconfig
-Patch: boa-default-config.patch
-URL: http://www.boa.org/
-License: GPL
-Group: System/Servers
-BuildRoot: %{_tmppath}/%{name}-%{version}buildroot
-BuildRequires: flex bison
-Requires: /etc/mime.types
-Requires(post): rpm-helper
-Requires(postun): rpm-helper
+Summary:	Web server
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
+Source0:	http://www.boa.org/%{name}-%{version}%{rcver}.tar.gz
+Source1:	boa.init
+Source2:	boa.sysconfig
+Patch:		boa-default-config.patch
+URL:		http://www.boa.org/
+License:	GPL+
+Group:		System/Servers
+BuildRoot:	%{_tmppath}/%{name}-%{version}buildroot
+BuildRequires:	flex
+BuildRequires:	bison
+
+Requires(post):		rpm-helper
+Requires(postun):	rpm-helper
+
 Provides: webserver
 
 %description
-a high speed, lightweight web server (HTTP protocol).
-based on direct use of the select(2) system call, it
+A high speed, lightweight web server (HTTP protocol).
+Based on direct use of the select(2) system call, it
 internally multiplexes all connections without forking,
 for maximum speed and minimum system resource use.
 
 %prep
 %setup -q -n %{name}-%{version}%{rcver}
-%patch -p 1
+%patch -p1
 
 %build
 %serverbuild
 %configure
-%make CFLAGS="$RPM_OPT_FLAGS"
+%make CFLAGS="%{optflags}"
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 cd src
-mkdir -p $RPM_BUILD_ROOT%{_sbindir}
-install boa $RPM_BUILD_ROOT%{_sbindir}
-mkdir -p $RPM_BUILD_ROOT%{_libdir}/boa
-install boa_indexer $RPM_BUILD_ROOT%{_libdir}/boa/
+mkdir -p %{buildroot}%{_sbindir}
+install boa %{buildroot}%{_sbindir}
+mkdir -p %{buildroot}%{_libdir}/boa
+install boa_indexer %{buildroot}%{_libdir}/boa/
 
-mkdir -p $RPM_BUILD_ROOT/%{webrootdir}
+mkdir -p %{buildroot}/%{webrootdir}
 
 cd ..
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man8
-install -m 644 docs/boa.8 $RPM_BUILD_ROOT%{_mandir}/man8/
+mkdir -p %{buildroot}%{_mandir}/man8
+install -m 644 docs/boa.8 %{buildroot}%{_mandir}/man8/
 
 cd examples
-mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/{boa,logrotate.d}
-install -m 644 boa.conf $RPM_BUILD_ROOT/%{_sysconfdir}/boa/
+mkdir -p %{buildroot}/%{_sysconfdir}/{boa,logrotate.d}
+install -m 644 boa.conf %{buildroot}/%{_sysconfdir}/boa/
 cd ../contrib
-install -m 644 redhat/boa.logrotate $RPM_BUILD_ROOT/%{_sysconfdir}/logrotate.d/boa
+install -m 644 rpm/boa.logrotate %{buildroot}/%{_sysconfdir}/logrotate.d/boa
 
 cd ..
-mkdir -p $RPM_BUILD_ROOT/%{_initrddir}
-install -m 755 %{SOURCE1} $RPM_BUILD_ROOT/%{_initrddir}/boa
-mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/sysconfig
-install -m 644 %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/sysconfig/boa
+mkdir -p %{buildroot}/%{_initrddir}
+install -m 755 %{SOURCE1} %{buildroot}/%{_initrddir}/boa
+mkdir -p %{buildroot}/%{_sysconfdir}/sysconfig
+install -m 644 %{SOURCE2} %{buildroot}/%{_sysconfdir}/sysconfig/boa
 
-mkdir -p $RPM_BUILD_ROOT/var/log/boa
+mkdir -p %{buildroot}/var/log/boa
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post
 %_post_service boa
