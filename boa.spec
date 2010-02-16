@@ -37,7 +37,7 @@ for maximum speed and minimum system resource use.
 
 %build
 %serverbuild
-%configure
+%configure2_5x
 %make CFLAGS="%{optflags}"
 
 %install
