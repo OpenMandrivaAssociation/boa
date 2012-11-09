@@ -1,0 +1,48 @@
+--- boa-0.94.14rc21/examples/boa.conf.conf	2003-02-02 06:02:22.000000000 +0100
++++ boa-0.94.14rc21/examples/boa.conf	2010-02-16 17:06:55.000000000 +0100
+@@ -52,7 +52,7 @@
+ # Note: this is not currently used, except as an environment variable
+ # for CGIs.
+ 
+-#ServerAdmin root@localhost
++ServerAdmin root@localhost
+ 
+ # PidFile: where to put the pid of the process.
+ # Comment out to write no pid file.
+@@ -110,7 +110,7 @@
+ #  It simply notes the start and stop times of cgis in the error log
+ # Comment out to disable.
+ 
+-#VerboseCGILogs
++VerboseCGILogs
+ 
+ # ServerName: the name of this server that should be sent back to 
+ # clients if different than that returned by gethostname + gethostbyname 
+@@ -155,7 +155,7 @@
+ # DocumentRoot: The root directory of the HTML documents.
+ # Comment out to disable server non user files.
+ 
+-DocumentRoot /var/www
++DocumentRoot /var/www/html
+ 
+ # UserDir: The name of the directory which is appended onto a user's home
+ # directory if a ~user request is received.
+@@ -217,7 +217,8 @@
+ # Example: AddType type extension [extension ...]
+ 
+ # Uncomment the next line if you want .cgi files to execute from anywhere
+-#AddType application/x-httpd-cgi cgi
++AddType application/x-httpd-cgi cgi
++AddType application/x-httpd-cgi pl
+ 
+ # Redirect, Alias, and ScriptAlias all have the same semantics -- they
+ # match the beginning of a request and take appropriate action.  Use
+@@ -232,7 +233,7 @@
+ # Aliases: Aliases one path to another.
+ # Example: Alias /path1/bar /path2/foo
+ 
+-Alias /doc /usr/doc
++# Alias /doc /usr/doc
+ 
+ # ScriptAlias: Maps a virtual path to a directory for serving scripts
+ # Example: ScriptAlias /htbin/ /www/htbin/
