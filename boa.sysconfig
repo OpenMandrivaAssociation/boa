@@ -1,0 +1,11 @@
+# external boa startup
+#
+# TMP :  read/write directory needed for CGI/POST, owner boa user/group
+TMP="/tmp"
+#
+# SERVERROOT : specify  boa.conf location  (default:/etc/boa)
+SERVERROOT=
+#
+# CHROOT : specify chroot directory, (default: empty for normal startup)
+CHROOT=
+
