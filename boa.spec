@@ -13,7 +13,7 @@ Source0:	http://www.boa.org/%{name}-%{version}%{rcver}.tar.gz
 Source1:	boa.init
 Source2:	boa.sysconfig
 Patch:		boa-default-config.patch
-URL:		http://www.boa.org/
+URL:		https://www.boa.org/
 License:	GPL+
 Group:		System/Servers
 BuildRoot:	%{_tmppath}/%{name}-%{version}buildroot
